@@ -103,7 +103,7 @@ def evaluate_baseline(
     summary = {
         "stage": "step_1_prompt_only_baseline",
         "timestamp": datetime.now().isoformat(timespec="seconds"),
-        "dataset_dir": str(questions.shape[0]),
+        "dataset_dir": str(DATASET_DIR),
         "questions_attempted": len(results),
         "successful_answers": sum(
             bool(item["baseline_answer"])

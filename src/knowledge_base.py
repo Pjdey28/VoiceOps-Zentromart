@@ -85,6 +85,34 @@ def _split_sections(content: str):
 
     return sections
 
+def _load_holidays_chunks() -> list[KnowledgeChunk]:
+    """Load holiday dates as authoritative evidence for timeline calculations."""
+    holidays_path = DATASET_DIR / "data" / "holidays.csv"
+    if not holidays_path.is_file():
+        return []
+
+    text = "ZentroMart Official Holidays:\n"
+    with holidays_path.open("r", encoding="utf-8-sig", newline="") as file:
+        for row in csv.DictReader(file):
+            date = str(row.get("date", "")).strip()
+            name = str(row.get("name", "")).strip()
+            if date:
+                text += f"- {date}: {name}\n"
+
+    return [
+        KnowledgeChunk(
+            chunk_id="holidays.csv",
+            section_id="holidays",
+            source_file="holidays.csv",
+            title="Official Holidays",
+            category="calendar",
+            status="current",
+            effective_from="2026-10-20",
+            text=text,
+            authoritative=True,
+            priority=1,
+        )
+    ]
 
 def load_knowledge_base() -> list[KnowledgeChunk]:
     kb_dir = DATASET_DIR / "kb"
@@ -139,6 +167,7 @@ def load_knowledge_base() -> list[KnowledgeChunk]:
         raise ValueError(f"No Markdown knowledge chunks found in {kb_dir}")
 
     chunks.extend(_load_product_chunks())
+    chunks.extend(_load_holidays_chunks())
     return chunks
 
 

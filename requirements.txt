@@ -6,3 +6,5 @@ numpy
 tqdm
 scikit-learn
 gnani-vachana
+sentence-transformers
+torch

@@ -8,7 +8,7 @@ from src.evaluate import run_rag_evaluation
 from src.evaluate import run_conversation_evaluation
 from src.evaluate import run_conversation_evaluation_v2
 from src.voice import process_audio_folder
-
+from src.config import DATASET_DIR
 
 def main() -> None:
     parser = argparse.ArgumentParser(
@@ -56,7 +56,7 @@ def main() -> None:
 
     if args.command == "check-data":
         validate_dataset_dir()
-        print(f"Dataset directory found: ")
+        print(f"Dataset directory found: {DATASET_DIR}")
         print("Run the dataset's own validator next.")
     elif args.command == "inspect":
         validate_dataset_dir()

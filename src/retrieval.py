@@ -1,24 +1,20 @@
-
 from dataclasses import dataclass
 import re
 
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+from sentence_transformers import SentenceTransformer, util
+import torch
 
 from src.knowledge_base import KnowledgeChunk, load_knowledge_base
-
 
 @dataclass
 class RetrievedChunk:
     chunk: KnowledgeChunk
     similarity: float
 
-
 class KnowledgeRetriever:
     def __init__(self):
         self.chunks = load_knowledge_base()
 
-        # Prefer section-level evidence over document front matter.
         sectioned_files = {
             chunk.source_file
             for chunk in self.chunks
@@ -34,20 +30,14 @@ class KnowledgeRetriever:
         if not self.chunks:
             raise ValueError("The knowledge base contains no retrievable chunks.")
 
-        # Include headings and IDs so broad queries can match section titles.
         self.documents = [
             f"{chunk.title}\n{chunk.section_id}\n{chunk.text}"
             for chunk in self.chunks
         ]
 
-        self.vectorizer = TfidfVectorizer(
-            ngram_range=(1, 2),
-            sublinear_tf=True,
-            strip_accents="unicode",
-            stop_words="english",
-        )
-
-        self.matrix = self.vectorizer.fit_transform(self.documents)
+        # Initialize dense embedding model
+        self.model = SentenceTransformer("all-MiniLM-L6-v2")
+        self.embeddings = self.model.encode(self.documents, convert_to_tensor=True)
 
     @staticmethod
     def _catalog_match_score(query: str, chunk: KnowledgeChunk) -> float:
@@ -112,11 +102,11 @@ class KnowledgeRetriever:
                 chunk.text for chunk, _ in catalog_candidates
             )
 
-        query_vector = self.vectorizer.transform([expanded_query])
-        scores = cosine_similarity(query_vector, self.matrix).ravel()
+        # Semantic Search execution
+        query_embedding = self.model.encode(expanded_query, convert_to_tensor=True)
+        scores = util.cos_sim(query_embedding, self.embeddings)[0].cpu().tolist()
 
         results = []
-
         for index, score in enumerate(scores):
             chunk = self.chunks[index]
 
@@ -124,6 +114,8 @@ class KnowledgeRetriever:
                 continue
 
             score = max(float(score), self._catalog_match_score(query, chunk))
+            
+            # Policy booster logic
             if catalog_candidates and chunk.category != "catalog":
                 categories = {
                     str(candidate[0].text).split("Return category:", 1)[-1]
@@ -144,7 +136,7 @@ class KnowledgeRetriever:
                 ):
                     score += 0.25
 
-            if score <= 0:
+            if score <= 0.1: # Increased threshold for dense embeddings
                 continue
 
             results.append(
@@ -170,6 +162,7 @@ class KnowledgeRetriever:
                 and self._catalog_match_score(query, result.chunk) >= 0.4
             )
         ]
+        
         if sku_matches:
             catalog_results = [
                 result
@@ -177,9 +170,8 @@ class KnowledgeRetriever:
                 if result.chunk.section_id.rsplit(":", 1)[-1].lower()
                 in sku_matches
             ]
+            
         if catalog_results:
-            # Product questions need the catalog row and the policy that
-            # explains how that row should be interpreted.
             selected_catalog = catalog_results[:2]
             selected_ids = {
                 result.chunk.chunk_id for result in selected_catalog

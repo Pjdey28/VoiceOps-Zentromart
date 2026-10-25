@@ -12,7 +12,8 @@ from src.tools import lookup_order, create_ticket
 
 SYSTEM_PROMPT = """
 You are ZentroMart's customer-support assistant.
-
+Today's date is 20 October 2026.
+Business days run Mon-Sat, excluding holidays.csv.
 Your job is to resolve customer issues accurately, safely, and politely.
 
 AVAILABLE ACTIONS

@@ -1,4 +1,3 @@
-
 """Gnani.ai voice pipeline and batch audio processing for VoiceOps."""
 
 import argparse
@@ -207,6 +206,13 @@ def synthesize_audio(
     text = str(text or "").strip()
     if not text:
         raise ValueError("Cannot synthesize an empty response.")
+
+    # Seamless fallback to hi-en for Hinglish or mixed text
+    if language == "en-IN":
+        hinglish_terms = {"hai", "aur", "aap", "aapka", "kya", "liye", "kijiye", "dhanyawad", "namaste", "madad", "chahiye"}
+        text_words = set(re.findall(r'[a-z]+', text.lower()))
+        if text_words.intersection(hinglish_terms) or re.search(r'[\u0900-\u097F]', text):
+            language = "hi-en"
 
     if tts_client is None:
         _, tts_client = _make_clients()
