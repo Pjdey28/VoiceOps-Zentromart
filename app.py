@@ -32,7 +32,12 @@ st.caption("Ask by text or upload a WAV/MP4 customer message. The assistant reme
 def _initialise_session() -> None:
     if "agent" not in st.session_state:
         st.session_state.agent = ConversationController()
-        st.session_state.retriever = KnowledgeRetriever()
+        try:
+            st.session_state.retriever = KnowledgeRetriever()
+            st.session_state.startup_error = None
+        except (FileNotFoundError, ValueError) as exc:
+            st.session_state.retriever = None
+            st.session_state.startup_error = exc
         st.session_state.turns = []
 
 
@@ -112,6 +117,13 @@ def _handle_text_turn(transcript: str, input_audio: str | None = None) -> None:
         st.warning("Please enter a message or provide an audio file containing speech.")
         return
 
+    if st.session_state.retriever is None:
+        st.error(
+            "This deployment cannot process messages until the knowledge "
+            "dataset is configured."
+        )
+        return
+
     with st.spinner("Preparing the response..."):
         evidence = _retrieve_evidence(transcript, st.session_state.retriever)
         response = st.session_state.agent.handle_message(transcript)
@@ -157,6 +169,14 @@ def _handle_audio_turn(uploaded_file: Any) -> None:
 
 
 _initialise_session()
+
+if st.session_state.get("startup_error"):
+    st.error(
+        "The knowledge dataset is not available in this deployment. "
+        "Configure DATASET_DIR to a mounted copy of the supplied dataset "
+        "before sending messages."
+    )
+    st.caption(f"Startup detail: {st.session_state.startup_error}")
 
 if st.button("Reset conversation", type="secondary"):
     st.session_state.agent.reset()

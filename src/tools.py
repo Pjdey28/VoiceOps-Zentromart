@@ -31,12 +31,20 @@ def _load_dataset_tools():
     return module
 
 
-_dataset_tools = _load_dataset_tools()
+_dataset_tools = None
+
+
+def _get_dataset_tools():
+    """Load supplied tools only when an order or ticket action is requested."""
+    global _dataset_tools
+    if _dataset_tools is None:
+        _dataset_tools = _load_dataset_tools()
+    return _dataset_tools
 
 
 def lookup_order(order_id, verification_value=None):
     """Use the supplied lookup tool; verification is optional for lookup."""
-    function = _dataset_tools.lookup_order
+    function = _get_dataset_tools().lookup_order
     parameters = inspect.signature(function).parameters
 
     if "order_id" not in parameters:
@@ -76,7 +84,7 @@ def create_ticket(summary, order_id=None, reason=None, intent=None):
     if not str(summary or "").strip():
         raise ValueError("A non-empty ticket summary is required.")
 
-    function = _dataset_tools.create_ticket
+    function = _get_dataset_tools().create_ticket
     parameters = inspect.signature(function).parameters
 
     kwargs = {"summary": str(summary).strip()}
