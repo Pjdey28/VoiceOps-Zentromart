@@ -1,0 +1,57 @@
+[
+  {
+    "chunk_id": "pol_returns_v4:RET-3",
+    "section_id": "RET-3",
+    "source_file": "pol_returns_v4.md",
+    "title": "Change to electronics returns",
+    "category": "policy",
+    "status": "current",
+    "effective_from": "2026-08-01",
+    "similarity": 0.715,
+    "text": "## [RET-3] Change to electronics returns\nFrom **1 August 2026**, the return window for electronics and accessories is 7 days. Electronics **delivered before 1 August 2026** keep the earlier 10-day window from version 3 of this policy."
+  },
+  {
+    "chunk_id": "pol_returns_v4:RET-4",
+    "section_id": "RET-4",
+    "source_file": "pol_returns_v4.md",
+    "title": "Condition of returned items",
+    "category": "policy",
+    "status": "current",
+    "effective_from": "2026-08-01",
+    "similarity": 0.6031,
+    "text": "## [RET-4] Condition of returned items\nItems must be unused, with original tags, packaging, accessories and free gifts. Beauty and personal care products are returnable only if unopened with the seal intact. Electronics must not be physically damaged, and any screen lock or account lock must be removed."
+  },
+  {
+    "chunk_id": "faq_general:FAQ-2",
+    "section_id": "FAQ-2",
+    "source_file": "faq_general.md",
+    "title": "Can I return something I bought?",
+    "category": "faq",
+    "status": "current",
+    "effective_from": "2025-11-01",
+    "similarity": 0.5435,
+    "text": "## [FAQ-2] Can I return something I bought?\nMost items can be returned within the return window. Some items, like grocery, cannot be returned."
+  },
+  {
+    "chunk_id": "pol_returns_v4:RET-5",
+    "section_id": "RET-5",
+    "source_file": "pol_returns_v4.md",
+    "title": "Items that cannot be returned",
+    "category": "policy",
+    "status": "current",
+    "effective_from": "2026-08-01",
+    "similarity": 0.5026,
+    "text": "## [RET-5] Items that cannot be returned\nGrocery and fresh produce, innerwear, lingerie and swimwear, and gift cards or digital codes cannot be returned for change of mind. If such an item arrives damaged, expired, wrong or missing, follow the Damaged, wrong or missing items policy."
+  },
+  {
+    "chunk_id": "pol_returns_v4:RET-1",
+    "section_id": "RET-1",
+    "source_file": "pol_returns_v4.md",
+    "title": "Scope",
+    "category": "policy",
+    "status": "current",
+    "effective_from": "2026-08-01",
+    "similarity": 0.4691,
+    "text": "## [RET-1] Scope\nThis policy covers items bought on ZentroMart, whether shipped by ZentroMart or by a marketplace seller. Seller-specific warranty terms are in the Marketplace sellers policy, but return windows are the same for every seller."
+  }
+]

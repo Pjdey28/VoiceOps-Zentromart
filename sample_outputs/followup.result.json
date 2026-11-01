@@ -1,15 +1,71 @@
 {
   "source_audio": "C:\\Users\\sajal\\Downloads\\voiceops_zentromart\\audio\\followup.mp4",
-  "processed_at_utc": "2026-11-01T18:36:13.169597+00:00",
+  "processed_at_utc": "2026-11-01T18:59:45.393206+00:00",
   "language_code": "en-IN",
   "tts_voice": "Kaveri",
   "tts_model": "timbre-v2.5",
-  "transcript": "",
-  "response": "",
-  "retrieved_evidence": [],
-  "reply_audio": "",
-  "decision": null,
+  "transcript": "how many days do i have to send the electronics back",
+  "response": "The return window for electronics depends on when the item was delivered:\n\n* **If the electronics were delivered on or after 1 August 2026**, you have **7 calendar days** to send it back.  \n* **If the electronics were delivered before 1 August 2026**, the older policy applies and you have **10 calendar days** to return it.\n\n(Policy source: **RET‑3**)",
+  "retrieved_evidence": [
+    {
+      "chunk_id": "pol_returns_v4:RET-3",
+      "section_id": "RET-3",
+      "source_file": "pol_returns_v4.md",
+      "title": "Change to electronics returns",
+      "category": "policy",
+      "status": "current",
+      "effective_from": "2026-08-01",
+      "similarity": 0.698,
+      "text": "## [RET-3] Change to electronics returns\nFrom **1 August 2026**, the return window for electronics and accessories is 7 days. Electronics **delivered before 1 August 2026** keep the earlier 10-day window from version 3 of this policy."
+    },
+    {
+      "chunk_id": "pol_returns_v4:RET-7",
+      "section_id": "RET-7",
+      "source_file": "pol_returns_v4.md",
+      "title": "After pickup",
+      "category": "policy",
+      "status": "current",
+      "effective_from": "2026-08-01",
+      "similarity": 0.4138,
+      "text": "## [RET-7] After pickup\nReturned items go through a quality check (QC) at the warehouse. The refund is initiated within 2 business days of pickup once the item passes QC. For ZentroMart Plus members, the refund is initiated at the time of pickup. Refund timelines after initiation are in the Refunds policy."
+    },
+    {
+      "chunk_id": "pol_damaged_wrong_missing:DWM-4",
+      "section_id": "DWM-4",
+      "source_file": "pol_damaged_wrong_missing.md",
+      "title": "Reported after 48 hours",
+      "category": "policy",
+      "status": "current",
+      "effective_from": "2026-05-01",
+      "similarity": 0.4122,
+      "text": "## [DWM-4] Reported after 48 hours\nReports after 48 hours are handled as a normal return if the item is still within its return window. Otherwise the customer can use the brand or ZentroMart Assured warranty, if any."
+    },
+    {
+      "chunk_id": "pol_refunds:REF-1",
+      "section_id": "REF-1",
+      "source_file": "pol_refunds.md",
+      "title": "When a refund is initiated",
+      "category": "policy",
+      "status": "current",
+      "effective_from": "2026-06-15",
+      "similarity": 0.402,
+      "text": "## [REF-1] When a refund is initiated\n- **Cancelled before shipping:** immediately on cancellation.\n- **Returned item:** after the item passes quality check, within 2 business days of pickup. ZentroMart Plus members: at pickup.\n- **Prepaid order refused at the door or not delivered after 3 attempts:** once the parcel reaches the warehouse, usually 7 to 10 calendar days after the last delivery attempt."
+    },
+    {
+      "chunk_id": "pol_payments_cod:PAY-3",
+      "section_id": "PAY-3",
+      "source_file": "pol_payments_cod.md",
+      "title": "Failed payments",
+      "category": "policy",
+      "status": "current",
+      "effective_from": "2026-04-01",
+      "similarity": 0.3896,
+      "text": "## [PAY-3] Failed payments\nIf money was deducted but the order was not placed, the amount is reversed automatically by the payment provider within 5 business days. No ticket is needed before that."
+    }
+  ],
+  "reply_audio": "C:\\Users\\sajal\\Downloads\\voiceops_zentromart\\sample_outputs\\followup.reply.wav",
+  "decision": "answer",
   "tool_calls": [],
-  "error": "ValueError: Unable to read WAV audio: followup.mp4",
-  "status": "error"
+  "error": null,
+  "status": "success"
 }

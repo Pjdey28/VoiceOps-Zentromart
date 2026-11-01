@@ -34,7 +34,7 @@ def main() -> None:
             "rag-evaluate: run RAG evaluation; "
             "conversation-evaluate: run conversation evaluation; "
             "conversation-evaluate-v2: run conversation evaluation (v2); "
-            "voice-batch: process a folder of WAV files with Gnani STT/TTS."
+            "voice-batch: process a folder of WAV or MP4 files with Gnani STT/TTS."
         ),
     )
     parser.add_argument(

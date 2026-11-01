@@ -41,7 +41,7 @@ The required batch command takes a folder of customer audio files, processes eve
 python run.py voice-batch --input .\audio --output .\outputs\voice
 ```
 
-The voice pipeline accepts WAV and MP4 files up to 60 seconds. MP4 input is converted to a temporary mono WAV using FFmpeg before being sent to Gnani STT. Install FFmpeg separately and make sure `ffmpeg` is available on `PATH`. It uses `en-IN` (with seamless `hi-en` Hinglish fallback), the `Kaveri` voice, and the explicitly named `timbre-v2.5` TTS model by default.
+The voice pipeline accepts WAV and MP4 files up to 60 seconds. MP4 audio is decoded with PyAV and converted to a temporary mono 16 kHz WAV before being sent to Gnani STT. FFmpeg is an optional fallback when PyAV is unavailable. It uses `en-IN` (with seamless `hi-en` Hinglish fallback), the `Kaveri` voice, and the explicitly named `timbre-v2.5` TTS model by default.
 
 ## Evaluation Commands
 

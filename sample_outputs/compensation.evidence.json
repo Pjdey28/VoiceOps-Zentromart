@@ -1,0 +1,57 @@
+[
+  {
+    "chunk_id": "agent_conversation_style:STY-3",
+    "section_id": "STY-3",
+    "source_file": "agent_conversation_style.md",
+    "title": "Voice replies",
+    "category": "agent_guide",
+    "status": "current",
+    "effective_from": "2026-07-01",
+    "similarity": 0.3424,
+    "text": "## [STY-3] Voice replies\nWhen replying by voice, keep it to two or three short sentences. Say dates with the month name (\"the 24th of October\"), read order IDs in groups of four digits, and say amounts in rupees (\"forty-nine rupees\")."
+  },
+  {
+    "chunk_id": "pol_returns_v4:RET-6",
+    "section_id": "RET-6",
+    "source_file": "pol_returns_v4.md",
+    "title": "Reverse pickup and fees",
+    "category": "policy",
+    "status": "current",
+    "effective_from": "2026-08-01",
+    "similarity": 0.3297,
+    "text": "## [RET-6] Reverse pickup and fees\nReturns are collected from the delivery address through reverse pickup. A reverse pickup fee of ₹49 applies to change-of-mind returns of clothing, footwear and bags. The fee is waived for ZentroMart Plus members and for any item returned because it was damaged, defective or wrong."
+  },
+  {
+    "chunk_id": "pol_damaged_wrong_missing:DWM-3",
+    "section_id": "DWM-3",
+    "source_file": "pol_damaged_wrong_missing.md",
+    "title": "High-value items",
+    "category": "policy",
+    "status": "current",
+    "effective_from": "2026-05-01",
+    "similarity": 0.3296,
+    "text": "## [DWM-3] High-value items\nClaims for items worth more than ₹10,000 are handled by the Priority Resolution team. The support agent must create a ticket and hand over; the agent cannot approve these claims."
+  },
+  {
+    "chunk_id": "pol_refunds:REF-5",
+    "section_id": "REF-5",
+    "source_file": "pol_refunds.md",
+    "title": "Delivery and COD fees",
+    "category": "policy",
+    "status": "current",
+    "effective_from": "2026-06-15",
+    "similarity": 0.2923,
+    "text": "## [REF-5] Delivery and COD fees\nDelivery fees and the ₹25 cash-on-delivery fee are refunded only when the whole order is cancelled before shipping or returned because it was damaged, defective or wrong."
+  },
+  {
+    "chunk_id": "agent_escalation_handoff:ESC-1",
+    "section_id": "ESC-1",
+    "source_file": "agent_escalation_handoff.md",
+    "title": "When to hand over to a human",
+    "category": "agent_guide",
+    "status": "current",
+    "effective_from": "2026-07-01",
+    "similarity": 0.291,
+    "text": "## [ESC-1] When to hand over to a human\nHand over at once when any of these is true:\n\n1. **Damaged, defective or wrong item worth more than ₹10,000.**\n2. **Customer reports an order, payment or account activity they did not make.**\n3. **Customer mentions legal action, a consumer court or a police complaint.**\n4. **Third or later contact about the same issue within 7 days.**\n5. **Refund more than 3 business days past its maximum timeline.**\n6. **Customer asks for a human agent.**\n7. **Product safety risk such as a swelling battery, burning smell, sparks or injury.**\n\nFor the repeat-contact rule, use the `contacts_last_7_days` field returned by order lookup. It counts earlier contacts only, not the current one. Escalate when it is 2 or more."
+  }
+]

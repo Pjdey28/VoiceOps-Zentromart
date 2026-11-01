@@ -107,13 +107,6 @@ def _prepare_audio_for_stt(audio_path: Path) -> tuple[Path, Path | None]:
             "Unsupported audio format. Use WAV or MP4 input files."
         )
 
-    ffmpeg = shutil.which("ffmpeg")
-    if not ffmpeg:
-        raise RuntimeError(
-            "MP4 input requires FFmpeg. Install FFmpeg and add its bin "
-            "directory to PATH, then run the command again."
-        )
-
     temporary_file = tempfile.NamedTemporaryFile(
         suffix=".wav",
         prefix="voiceops_",
@@ -123,6 +116,59 @@ def _prepare_audio_for_stt(audio_path: Path) -> tuple[Path, Path | None]:
     temporary_file.close()
 
     try:
+        _convert_mp4_to_wav(audio_path, temporary_path)
+
+        _validate_audio_file(temporary_path)
+        return temporary_path, temporary_path
+    except Exception:
+        temporary_path.unlink(missing_ok=True)
+        raise
+
+
+def _convert_mp4_to_wav(audio_path: Path, output_path: Path) -> None:
+    """Decode MP4 audio without requiring a system FFmpeg installation."""
+    try:
+        import av
+    except ImportError:
+        av = None
+
+    if av is not None:
+        try:
+            with av.open(str(audio_path)) as container:
+                audio_stream = next(
+                    (stream for stream in container.streams if stream.type == "audio"),
+                    None,
+                )
+                if audio_stream is None:
+                    raise ValueError("The MP4 file contains no audio stream.")
+
+                resampler = av.audio.resampler.AudioResampler(
+                    format="s16",
+                    layout="mono",
+                    rate=16000,
+                )
+                with wave.open(str(output_path), "wb") as wav_file:
+                    wav_file.setnchannels(1)
+                    wav_file.setsampwidth(2)
+                    wav_file.setframerate(16000)
+                    for frame in container.decode(audio=audio_stream.index):
+                        resampled = resampler.resample(frame)
+                        if not isinstance(resampled, list):
+                            resampled = [resampled]
+                        for resampled_frame in resampled:
+                            wav_file.writeframes(
+                                bytes(resampled_frame.planes[0])
+                            )
+                return
+        except ValueError:
+            raise
+        except Exception as exc:
+            raise ValueError(
+                f"Unable to extract audio from MP4 file {audio_path.name}: {exc}"
+            ) from exc
+
+    ffmpeg = shutil.which("ffmpeg")
+    if ffmpeg:
         completed = subprocess.run(
             [
                 ffmpeg,
@@ -139,24 +185,24 @@ def _prepare_audio_for_stt(audio_path: Path) -> tuple[Path, Path | None]:
                 "-sample_fmt",
                 "s16",
                 "-y",
-                str(temporary_path),
+                str(output_path),
             ],
             capture_output=True,
             text=True,
             check=False,
         )
-        if completed.returncode != 0:
-            detail = completed.stderr.strip()
-            raise ValueError(
-                f"Unable to extract audio from MP4 file {audio_path.name}"
-                + (f": {detail}" if detail else ".")
-            )
+        if completed.returncode == 0:
+            return
+        detail = completed.stderr.strip()
+        raise ValueError(
+            f"Unable to extract audio from MP4 file {audio_path.name}"
+            + (f": {detail}" if detail else ".")
+        )
 
-        _validate_audio_file(temporary_path)
-        return temporary_path, temporary_path
-    except Exception:
-        temporary_path.unlink(missing_ok=True)
-        raise
+    raise RuntimeError(
+        "MP4 decoding is unavailable. Install the project dependencies again "
+        "to install PyAV, or install FFmpeg and add it to PATH."
+    )
 
 
 def transcribe_audio(
@@ -337,7 +383,7 @@ def process_audio_file(
     model: str = DEFAULT_TTS_MODEL,
 ) -> Dict[str, Any]:
     """
-    Process one WAV file and persist transcript, response, evidence and audio.
+    Process one WAV or MP4 file and persist transcript, response, evidence and audio.
 
     STT and TTS use Gnani.ai. The existing conversation controller remains
     responsible for the support response and official mock-tool interactions.
@@ -370,8 +416,6 @@ def process_audio_file(
     }
 
     try:
-        _validate_audio_file(source)
-
         if stt_client is None or tts_client is None:
             created_stt, created_tts = _make_clients()
             stt_client = stt_client or created_stt

@@ -9,3 +9,4 @@ gnani-vachana
 sentence-transformers
 torch
 streamlit
+av
