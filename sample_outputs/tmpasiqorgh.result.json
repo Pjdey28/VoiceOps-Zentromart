@@ -1,0 +1,15 @@
+{
+  "source_audio": "C:\\Users\\sajal\\AppData\\Local\\Temp\\tmpasiqorgh.mp4",
+  "processed_at_utc": "2026-11-01T18:29:50.314508+00:00",
+  "language_code": "en-IN",
+  "tts_voice": "Kaveri",
+  "tts_model": "timbre-v2.5",
+  "transcript": "",
+  "response": "",
+  "retrieved_evidence": [],
+  "reply_audio": "",
+  "decision": null,
+  "tool_calls": [],
+  "error": "ValueError: Unable to read WAV audio: tmpasiqorgh.mp4",
+  "status": "error"
+}

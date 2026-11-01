@@ -1,0 +1,58 @@
+{
+  "processed_at_utc": "2026-11-01T18:36:13.196321+00:00",
+  "input_directory": "C:\\Users\\sajal\\Downloads\\voiceops_zentromart\\audio",
+  "output_directory": "C:\\Users\\sajal\\Downloads\\voiceops_zentromart\\sample_outputs",
+  "files_found": 3,
+  "successful": 0,
+  "failed": 3,
+  "results": [
+    {
+      "source_audio": "C:\\Users\\sajal\\Downloads\\voiceops_zentromart\\audio\\compensation.mp4",
+      "processed_at_utc": "2026-11-01T18:36:13.154248+00:00",
+      "language_code": "en-IN",
+      "tts_voice": "Kaveri",
+      "tts_model": "timbre-v2.5",
+      "transcript": "",
+      "response": "",
+      "retrieved_evidence": [],
+      "reply_audio": "",
+      "decision": null,
+      "tool_calls": [],
+      "error": "ValueError: Unable to read WAV audio: compensation.mp4",
+      "status": "error",
+      "result_json": "C:\\Users\\sajal\\Downloads\\voiceops_zentromart\\sample_outputs\\compensation.result.json"
+    },
+    {
+      "source_audio": "C:\\Users\\sajal\\Downloads\\voiceops_zentromart\\audio\\followup.mp4",
+      "processed_at_utc": "2026-11-01T18:36:13.169597+00:00",
+      "language_code": "en-IN",
+      "tts_voice": "Kaveri",
+      "tts_model": "timbre-v2.5",
+      "transcript": "",
+      "response": "",
+      "retrieved_evidence": [],
+      "reply_audio": "",
+      "decision": null,
+      "tool_calls": [],
+      "error": "ValueError: Unable to read WAV audio: followup.mp4",
+      "status": "error",
+      "result_json": "C:\\Users\\sajal\\Downloads\\voiceops_zentromart\\sample_outputs\\followup.result.json"
+    },
+    {
+      "source_audio": "C:\\Users\\sajal\\Downloads\\voiceops_zentromart\\audio\\policy.mp4",
+      "processed_at_utc": "2026-11-01T18:36:13.184629+00:00",
+      "language_code": "en-IN",
+      "tts_voice": "Kaveri",
+      "tts_model": "timbre-v2.5",
+      "transcript": "",
+      "response": "",
+      "retrieved_evidence": [],
+      "reply_audio": "",
+      "decision": null,
+      "tool_calls": [],
+      "error": "ValueError: Unable to read WAV audio: policy.mp4",
+      "status": "error",
+      "result_json": "C:\\Users\\sajal\\Downloads\\voiceops_zentromart\\sample_outputs\\policy.result.json"
+    }
+  ]
+}

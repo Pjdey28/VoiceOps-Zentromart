@@ -1,0 +1,15 @@
+{
+  "source_audio": "C:\\Users\\sajal\\Downloads\\voiceops_zentromart\\audio\\compensation.mp4",
+  "processed_at_utc": "2026-11-01T18:36:13.154248+00:00",
+  "language_code": "en-IN",
+  "tts_voice": "Kaveri",
+  "tts_model": "timbre-v2.5",
+  "transcript": "",
+  "response": "",
+  "retrieved_evidence": [],
+  "reply_audio": "",
+  "decision": null,
+  "tool_calls": [],
+  "error": "ValueError: Unable to read WAV audio: compensation.mp4",
+  "status": "error"
+}

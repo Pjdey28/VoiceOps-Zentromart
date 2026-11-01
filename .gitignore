@@ -8,6 +8,6 @@ __pycache__/
 
 outputs/*
 !outputs/.gitkeep
-
+.streamlit
 # Do not commit the supplied dataset
 Capstone_Project_Dataset_FTTT_2026/

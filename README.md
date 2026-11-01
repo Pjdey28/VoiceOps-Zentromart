@@ -1,5 +1,7 @@
 # ZentroMart VoiceOps Assistant
 
+**GitHub Repository:** [https://github.com/Pjdey28/VoiceOps-Zentromart](https://github.com/Pjdey28/VoiceOps-Zentromart)
+
 This project implements the four capstone stages:
 
 1. Prompt-only LLM answers.
@@ -31,9 +33,19 @@ This project implements the four capstone stages:
 
    Never commit `.env`, API keys, the dataset, or `.venv`.
 
-## Commands
+## Exact Run Command (For Evaluators)
 
-Run these from the project root:
+The required batch command takes a folder of customer audio files, processes every file with Gnani STT and Gnani TTS, and saves its replies (as text and audio) with the document chunks it used:
+
+```powershell
+python run.py voice-batch --input .\audio --output .\outputs\voice
+```
+
+The voice pipeline accepts WAV and MP4 files up to 60 seconds. MP4 input is converted to a temporary mono WAV using FFmpeg before being sent to Gnani STT. Install FFmpeg separately and make sure `ffmpeg` is available on `PATH`. It uses `en-IN` (with seamless `hi-en` Hinglish fallback), the `Kaveri` voice, and the explicitly named `timbre-v2.5` TTS model by default.
+
+## Evaluation Commands
+
+Run these from the project root to evaluate the pipeline stages:
 
 ```powershell
 python run.py check-data
@@ -46,9 +58,7 @@ python -m src.test_conversation
 
 Evaluation outputs are written under `outputs/`.
 
-The conversion-ready submission report is
-[SUBMISSION_REPORT.md](SUBMISSION_REPORT.md). Convert it to the required
-`report.pdf` after the final evaluation run and keep it within four pages.
+The conversion-ready submission report is [SUBMISSION_REPORT.md](SUBMISSION_REPORT.md). Convert it to the required `report.pdf` after the final evaluation run and keep it within four pages.
 
 ## Voice batch
 
@@ -59,12 +69,6 @@ response, evidence, reply-audio, and result files per input:
 ```powershell
 python run.py voice-batch --input .\audio --output .\outputs\voice
 ```
-
-The voice pipeline accepts WAV and MP4 files up to 60 seconds. MP4 input is
-converted to a temporary mono WAV using FFmpeg before being sent to Gnani STT.
-Install FFmpeg separately and make sure `ffmpeg` is available on `PATH`.
-It uses `en-IN`, the
-`Kaveri` voice, and the explicitly named `timbre-v2.5` TTS model by default.
 
 ## Data and safety behavior
 
@@ -83,21 +87,3 @@ Run the supplied dataset validator from the extracted dataset directory:
 ```powershell
 python validate_dataset.py
 ```
-
-## Submission checklist
-
-The capstone submission should be packaged as:
-
-```text
-team_name_voiceops.zip
-```
-
-Include the source code, `README.md`, `.env.example`, `requirements.txt`,
-`run.py`, `src/`, the converted `report.pdf`, and a demo video no longer than
-two minutes. Do not include `.env`, API keys, `.venv/`, the supplied dataset,
-or generated caches.
-
-The current evaluation artifacts are honest engineering measurements, not a
-claim of perfect quality. In particular, conversation decision agreement and
-RAG evidence recall still require review; complete limitations and results are
-documented in [SUBMISSION_REPORT.md](SUBMISSION_REPORT.md).
