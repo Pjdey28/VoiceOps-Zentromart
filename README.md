@@ -46,6 +46,10 @@ python -m src.test_conversation
 
 Evaluation outputs are written under `outputs/`.
 
+The conversion-ready submission report is
+[SUBMISSION_REPORT.md](SUBMISSION_REPORT.md). Convert it to the required
+`report.pdf` after the final evaluation run and keep it within four pages.
+
 ## Voice batch
 
 The required batch command accepts a folder of WAV or MP4 files, processes every file
@@ -79,3 +83,21 @@ Run the supplied dataset validator from the extracted dataset directory:
 ```powershell
 python validate_dataset.py
 ```
+
+## Submission checklist
+
+The capstone submission should be packaged as:
+
+```text
+team_name_voiceops.zip
+```
+
+Include the source code, `README.md`, `.env.example`, `requirements.txt`,
+`run.py`, `src/`, the converted `report.pdf`, and a demo video no longer than
+two minutes. Do not include `.env`, API keys, `.venv/`, the supplied dataset,
+or generated caches.
+
+The current evaluation artifacts are honest engineering measurements, not a
+claim of perfect quality. In particular, conversation decision agreement and
+RAG evidence recall still require review; complete limitations and results are
+documented in [SUBMISSION_REPORT.md](SUBMISSION_REPORT.md).
