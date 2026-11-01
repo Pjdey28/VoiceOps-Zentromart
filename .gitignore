@@ -11,3 +11,4 @@ outputs/*
 .streamlit
 # Do not commit the supplied dataset
 Capstone_Project_Dataset_FTTT_2026/
+.devcontainer/

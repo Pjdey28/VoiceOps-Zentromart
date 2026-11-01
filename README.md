@@ -1,8 +1,7 @@
 # ZentroMart VoiceOps Assistant
 ## Project links
 - **Repository:** https://github.com/Pjdey28/VoiceOps-Zentromart
-- **Dataset:** `https://drive.google.com/drive/folders/1D_Oj5YdpC_pXLB6dSciCBqwLnWnouMc4?usp=sharing`
-- **Deployed application:** `DEPLOYED_LINK_TO_BE_ADDED`
+- **Dataset:** `https://drive.google.com/drive/folders/1D_Oj5YdpC_pXLB6dSciCBqwLnWnouMc4?usp=sharing``
 - **Submission report:** [report.pdf](report.pdf)
 - **Demo video:** [demo.mp4](demo.mp4)
 ## Overview
