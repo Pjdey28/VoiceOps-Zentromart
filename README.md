@@ -60,6 +60,22 @@ Evaluation outputs are written under `outputs/`.
 
 The conversion-ready submission report is [SUBMISSION_REPORT.md](SUBMISSION_REPORT.md). Convert it to the required `report.pdf` after the final evaluation run and keep it within four pages.
 
+## Interactive Streamlit conversation
+
+Launch the conversation UI with:
+
+```powershell
+streamlit run app.py
+```
+
+The interface accepts either typed messages or WAV/MP4 audio turns and keeps
+follow-up messages in the same conversation. Use **Reset conversation** to
+clear the assistant state. Each turn displays the customer transcript, the
+assistant response, expandable document evidence, verified support actions,
+and a playable WAV reply when TTS is available. The UI renders these results
+as readable conversation content rather than JSON; JSON files remain available
+only for the batch evaluation artifact workflow.
+
 ## Voice batch
 
 The required batch command accepts a folder of WAV or MP4 files, processes every file
